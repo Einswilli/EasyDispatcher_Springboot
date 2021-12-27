@@ -15,7 +15,7 @@ public class CorsConfiguration
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("http://localhost:4200","https://dispatchertft.azurewebsites.net","https://tftwebapi.azurewebsites.net")
+                        .allowedOrigins("http://localhost:4200","https://dispatchertft.azurewebsites.net","https://tftwebapi.azurewebsites.net","http://localhost:8080")
                         .allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS")
                         .exposedHeaders("Authorization");
             }

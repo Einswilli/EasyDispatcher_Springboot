@@ -28,8 +28,9 @@ public class Client {
   private String clientAdresseCity;
   private String clientAdresseCountry;
   private String clientPhoneNumber;
-  //private String idClientPayer;
   private String clientAdresseComplete;
+  private String clientEmail;
+  //private String idClientPayer;
   // private String clientExpediteur;
   // private String clientDestinataire;
   // private String clientPayeur;

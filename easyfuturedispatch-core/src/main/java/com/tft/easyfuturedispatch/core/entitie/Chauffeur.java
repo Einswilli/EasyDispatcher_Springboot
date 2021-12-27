@@ -19,7 +19,10 @@ public class Chauffeur {
     private Long id;
     private String nomChauffeur;
     private String prenomChauffeur;
-    private Date date_embauche;
-    private Date date_depart;
-    private Statut_Chauffeur statut_chauffeur;
+    private String date_embauche;
+    private String date_depart;
+    private int  contact;
+    private String statut;
+    private String jour[];
+   // private Statut_Chauffeur statut_chauffeur;
 }

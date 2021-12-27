@@ -10,8 +10,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.ResourceAccessException;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
+import java.util.Map;
 @RestController
 @RequestMapping("/easyfuturedispatch/api/v1")
 public class ChauffeurController {
@@ -37,10 +39,23 @@ public class ChauffeurController {
         Chauffeur chauffeur1 = chauffeurRepository.findById(id).orElseThrow(() ->new ResourceAccessException("Chauffeur not found"));
         chauffeur1.setNomChauffeur(chauffeur.getNomChauffeur());
         chauffeur1.setPrenomChauffeur(chauffeur.getPrenomChauffeur());
-        chauffeur1.setStatut_chauffeur(chauffeur.getStatut_chauffeur());
+        chauffeur1.setJour(chauffeur.getJour());
+        chauffeur1.setStatut(chauffeur.getStatut());
+        chauffeur1.setContact(chauffeur.getContact());
         chauffeur1.setDate_depart(chauffeur.getDate_depart());
         chauffeur1.setDate_embauche(chauffeur.getDate_embauche());
         final Chauffeur c = chauffeurRepository.save(chauffeur1);
         return ResponseEntity.ok(c);
+    }
+    @DeleteMapping("/chauffeur/{id}")
+    public Map<String, Boolean> deleteChauffeur(@PathVariable(value = "id") Long chauffeurId)
+            throws ResourceNotFoundException {
+        Chauffeur chauffeur = chauffeurRepository.findById(chauffeurId)
+                .orElseThrow(() -> new ResourceNotFoundException("Chauffeur not found for this id :: " + chauffeurId));
+
+        chauffeurRepository.deleteById(chauffeurId);
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("deleted", Boolean.TRUE);
+        return response;
     }
 }

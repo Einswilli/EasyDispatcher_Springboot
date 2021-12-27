@@ -7,8 +7,9 @@ import com.tft.easyfuturedispatch.core.service.SequenceGeneratorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 @RestController
 @RequestMapping("/easyfuturedispatch/api/v1")
 public class CommandeController {
@@ -56,9 +57,10 @@ public class CommandeController {
         Commande command = commandeRepository.findById(commandId)
                 .orElseThrow(() -> new ResourceNotFoundException("Command not found for this id :: " + commandId));
 
-        commandeRepository.delete(command);
+        commandeRepository.deleteById(commandId);
         Map<String, Boolean> response = new HashMap<>();
         response.put("deleted", Boolean.TRUE);
+        System.out.println("\n\ncommand deleted\n\n");
         return response;
     }
 }

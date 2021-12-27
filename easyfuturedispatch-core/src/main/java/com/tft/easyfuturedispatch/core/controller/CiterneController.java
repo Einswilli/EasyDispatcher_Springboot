@@ -2,13 +2,17 @@ package com.tft.easyfuturedispatch.core.controller;
 
 import com.tft.easyfuturedispatch.core.dao.CiterneRepository;
 import com.tft.easyfuturedispatch.core.entitie.Citerne;
+import com.tft.easyfuturedispatch.core.entitie.Produit;
 import com.tft.easyfuturedispatch.core.exception.ResourceNotFoundException;
 import com.tft.easyfuturedispatch.core.service.SequenceGeneratorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/easyfuturedispatch/api/v1")
 public class CiterneController {
@@ -54,4 +58,16 @@ public class CiterneController {
         return ResponseEntity.ok(citerne1);
 
     }
+
+    @DeleteMapping("/deleteCiterne/{id}")
+    public Map<String, Boolean> deleteCiterne(@PathVariable(value = "id") Long citerneId)
+            throws ResourceNotFoundException {
+        Citerne citerne = citerneRepository.findById(citerneId)
+                .orElseThrow(() -> new ResourceNotFoundException("Citerne not found for this id :: " + citerneId));
+        citerneRepository.delete(citerne);
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("delete", Boolean.TRUE);
+        return response;
+    }
+
 }

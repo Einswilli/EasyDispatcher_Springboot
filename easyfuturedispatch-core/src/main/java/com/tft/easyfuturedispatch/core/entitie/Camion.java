@@ -18,13 +18,13 @@ public class Camion {
     @Id
     private Long id;
     private String marque;
-    private String modele;
+    private String model;
     private String matricule;
     private String couleur;
-    private Date anneFabrication;
+    private String anneFabrication;
     private double poids;
     private String puissance;
-    private Date dateEntretien;
+    private String dateEntretien;
     private boolean disponible;
     private boolean pret;
     private Chauffeur chauffeur;

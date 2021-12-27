@@ -1,5 +1,4 @@
 package com.tft.easyfuturedispatch.core.controller;
-
 import com.tft.easyfuturedispatch.core.dao.ProduitRepository;
 import com.tft.easyfuturedispatch.core.entitie.Produit;
 import com.tft.easyfuturedispatch.core.exception.ResourceNotFoundException;
@@ -7,8 +6,9 @@ import com.tft.easyfuturedispatch.core.service.SequenceGeneratorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/easyfuturedispatch/api/v1")
@@ -35,9 +35,20 @@ public class ProduitController {
         Produit p = produitRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Aucun element trouver"));
         p.setDescription(produit.getDescription());
         p.setDesignation(produit.getDesignation());
-        final Produit produit1 = produitRepository.save(p);
-        return  ResponseEntity.ok(produit1);
+        final Produit updateProduit = produitRepository.save(p);
+        return  ResponseEntity.ok(updateProduit);
     }
 
-    
+
+    @DeleteMapping("/deleteProduit/{id}")
+    public Map<String, Boolean> deleteProduit(@PathVariable(value = "id") Long produitId)
+            throws ResourceNotFoundException {
+        Produit produit = produitRepository.findById(produitId)
+                .orElseThrow(() -> new ResourceNotFoundException("Produit not found for this id :: " + produitId));
+        produitRepository.delete(produit);
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("delete", Boolean.TRUE);
+        return response;
+    }
+
 }

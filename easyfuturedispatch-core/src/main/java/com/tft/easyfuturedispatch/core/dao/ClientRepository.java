@@ -14,5 +14,4 @@ public interface ClientRepository extends MongoRepository<Client,Long> {
     @Query("{ 'clientType' : ?0 }")
     List<Client> getClientsByType(String clientType);
 
-
 }

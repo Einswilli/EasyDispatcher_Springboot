@@ -6,9 +6,11 @@ import com.tft.easyfuturedispatch.core.service.SequenceGeneratorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.http.HttpStatus;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.lang.Long;
 
 
 
@@ -23,6 +25,7 @@ public class ClientController {
 
     @GetMapping("/client")
     public List<Client> getAllClients() {
+    	System.out.println("\n\nGetting list...\n\n");
         return clientRepository.findAll();
     }
 
@@ -67,17 +70,23 @@ public class ClientController {
         final Client updatedClient = clientRepository.save(client);
         return ResponseEntity.ok(updatedClient);
     }
-
+    /*@DeleteMapping("/client/{id}")
+    public ResponseEntity<?> deleteClient(@PathVariable(value = "id") Long clientid){
+	System.out.println("\n\ndeleted\n\n");
+        clientRepository.deleteById(clientid);
+        System.out.println("\n\ndeleted\n\n");
+        return new ResponseEntity<>(HttpStatus.OK);
+    }*/
+    
     @DeleteMapping("/client/{id}")
     public Map<String, Boolean> deleteClient(@PathVariable(value = "id") Long clientId)
             throws ResourceNotFoundException {
         Client client = clientRepository.findById(clientId)
                 .orElseThrow(() -> new ResourceNotFoundException("Client not found for this id :: " + clientId));
 
-        clientRepository.delete(client);
+        clientRepository.deleteById(clientId);
         Map<String, Boolean> response = new HashMap<>();
         response.put("deleted", Boolean.TRUE);
         return response;
     }
-
 }
