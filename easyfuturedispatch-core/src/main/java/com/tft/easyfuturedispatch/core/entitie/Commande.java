@@ -7,6 +7,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.aggregation.DateOperators;
 import org.springframework.data.mongodb.core.mapping.Document;
+import com.tft.easyfuturedispatch.core.entitie.Produit;
 
 import java.util.Date;
 
@@ -23,7 +24,7 @@ public class Commande {
     private Client clientDestinataire;
     private int qte_normal_expedie;
     private int qte_degel_expedie;
-    private DateOperators.Hour temp_chargement_prevu;
+    private String temp_chargement_prevu;
     private double distance_expediteur_destinataire;
     private double prix_chauffeur;
     private double prix_voiturier;
@@ -31,6 +32,7 @@ public class Commande {
     private Date date_dechargement_prevu;
     private DateOperators.Hour heure_chargement_prevu;
     private DateOperators.Hour heure_dechargement_prevu;
-    private Type_Silo id_Type_silo_chargement;
-    private Type_Silo id_Type_silo_dechargement;
+    private String id_Type_silo_chargement;
+    private String id_Type_silo_dechargement;
+    private Produit produit;
 }
