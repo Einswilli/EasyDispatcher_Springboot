@@ -30,7 +30,7 @@ public class Citerne {
     private boolean isVaccum;
     private boolean isCertificated;
     private boolean isBackCharge;
-    private int dateEntretien;
+    private String dateEntretien;
     private int capacitePied;
     private int nbreCompartiment;
 
